@@ -1,0 +1,213 @@
+---
+title: "Presentation:"
+subtitle: "subtitle"
+author: Stu Field
+#date: "`r format(Sys.Date(), '%e %B %Y')`"
+date: "`r format(Sys.Date(), '%A %B %d, %Y')`"
+output:
+  xaringan::moon_reader:
+    css: ["default", "css/mtheme-max.css", "css/fonts-max.css"]
+    seal: true
+    #css: ["default", "css/mtheme-tom.css", "css/fonts-tom.css"]
+    #seal: false
+    self_contained: true
+    lib_dir: libs
+    nature:
+      ratio: '16:9'
+      highlightLanguage: R
+      highlightstylStyle: github
+      highlightstylLines: true
+      navigation: {click: true}
+      countIncrementalSlides: false
+---
+
+```{r setup, include = FALSE, message = FALSE, warning = FALSE}
+library(dplyr)
+library(tibble)
+library(ggplot2)
+options(replace.assign  = TRUE, digits = 3, width = 120)
+knitr::opts_chunk$set(
+  fig.align  = "center",    # alignment for figures; left, right, center
+  cache      = FALSE,       # should the chunk be cached?  
+  eval       = TRUE,        # evaluate the chunk?
+  cache.path = "cache/",    # the path for the cached chunks  
+  include    = TRUE,        # should the chunk be included as output? 
+  echo       = TRUE,        # should the chunk be echoed to the pdf? 
+  fig.retina = 2,
+  #fig.height = 7,
+  #fig.width  = 7,
+  tidy       = FALSE        # should output be cleaned up? 
+)
+# This is good for getting the ggplot background 
+# consistent with the html background color
+thm <- theme_bw() + 
+  theme(
+    panel.background = element_rect(fill = "transparent", colour = NA), 
+    plot.background = element_rect(fill = "transparent", colour = NA),
+    legend.position = "top",
+    legend.background = element_rect(fill = "transparent", colour = NA),
+    legend.key = element_rect(fill = "transparent", colour = NA)
+  )
+theme_set(thm)
+```
+
+
+<!-- class: title-slide, left, top -->
+
+<!-- # `r rmarkdown::metadata$title`<br> `r rmarkdown::metadata$subtitle` -->
+
+<!-- ### `r rmarkdown::metadata$author` -->
+
+<!-- #### `r Sys.Date()` -->
+
+<!-- --- -->
+
+
+# Outline
+
+- Something
+
+- This is the title: `r rmarkdown::metadata$title`
+
+- This is the author: `r rmarkdown::metadata$author`
+
+- That other thing
+
+--
+
+- on mouse click
+
+--
+
+> Here is some code that appears as a quote
+
+--
+
+- And we are done
+
+
+---
+
+layout: false
+class: inverse, middle, center
+
+# Heading Text
+
+---
+
+# Some Acronyms and Codes
+
+.pull-left[
+
+Test or code chunks for the lhs
+
+]
+
+.pull-right[
+
+rhs bits
+
+]
+
+---
+
+# Plot on the entire slide with a hex sticker <img src="hex_images/tidyposterior.png" class="title-hex">  <img src="hex_images/purrr.png" class="title-hex">
+
+```{r example-plot, fig.width = 6, fig.height = 5.5,  out.width = "40%", fig.align = "center", dev = "svg", dev.args = list(bg = "transparent")}
+ggplot(mtcars, aes(x = disp, y = mpg, color = factor(cyl))) +
+  geom_point(size = 5)
+```
+
+---
+
+# Plots on one side; Left side on Click
+
+.pull-left[
+
+show some code here but don't make image:
+
+```{r just_dont, eval = FALSE}
+ggplot(mtcars, aes(x = disp, y = mpg, color = factor(cyl))) +
+  geom_point(size = 5)
+```
+
+]
+
+
+--
+
+
+.pull-right[
+
+```{r example-plot-again, echo = FALSE, fig.width = 6, fig.height = 5.5,  out.width = "90%", fig.align = "center", dev = "svg", dev.args = list(bg = "transparent")}
+ggplot(mtcars, aes(x = disp, y = mpg, color = factor(cyl))) +
+  geom_point(size = 5)
+```
+
+]
+
+---
+
+# Insert images from file <img src="hex_images/dplyr.png" class="title-hex">
+
+.pull-left[
+
+Most statisticians say "no"
+```{r nope, out.width = "450px", echo = FALSE}
+knitr::include_graphics("figures/nopestradomis.jpg")
+```
+
+]
+
+
+.pull-right[
+
+The Variance-Bias Trade-off
+```{r varBias, out.width = "450px", echo = FALSE}
+knitr::include_graphics("figures/VarBias.png")
+```
+
+]
+
+
+---
+
+
+# The Variance-Bias Trade-off <img src="hex_images/rstudio.png" class="title-hex">
+
+.pull-left[
+
+* Variance: Differences in model output performance when refitting slightly different data 
+    - fits idiosyncrasies (noise) rather than signal 
+    - model is too flexible
+    - overfitting
+]
+
+--
+
+.pull-right[
+
+* Bias: lack of model performance due to model missing relationships between response and predictors
+    - doesn't fit enough signal in the data
+    - model is too rigid
+    - underfitting
+
+]
+
+---
+
+# The Packages of the tidyverse <img src="hex_images/tibble.png" class="title-hex"> <img src="hex_images/forcats.png" class="title-hex">
+
+```{r tidyverse, out.width = "45%", echo = FALSE}
+knitr::include_graphics("hex_images/tidyverse_all.png")
+```
+
+---
+
+# Flow-Diagram of the Cross-validation process <img src="hex_images/tidyverse.png" class="title-hex">
+
+```{r xvalid, out.width = "75%", echo = FALSE}
+knitr::include_graphics("figures/crossval-tree.png")
+```
+
+
